@@ -1,13 +1,12 @@
 <template>
   <div class="game-area">
-    <p>{{ selectedCard }}</p>
+    <p>answer: {{ answer.id }}</p>
     <h1 class="title">
       Where is <span>the cat<strong>?</strong></span>
     </h1>
     <h4 class="description">
       After you choose cat cards, click on the folded card.
     </h4>
-
     <div class="container">
       <transition-group name="rotate-all" appear class="card-container">
         <app-card
@@ -143,10 +142,10 @@ export default {
 }
 
 .rotate-enter-active {
-  animation: rotate-in .1s ease-in-out forwards;
+  animation: rotate-in 0.1s ease-in-out forwards;
 }
 .rotate-leave-active {
-  animation: rotate-out .1s ease-in-out forwards;
+  animation: rotate-out 0.1s ease-in-out forwards;
 }
 
 @keyframes rotate-in {
