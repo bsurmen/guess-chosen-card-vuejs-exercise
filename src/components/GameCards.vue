@@ -9,17 +9,25 @@
     </h4>
 
     <div class="container">
-      <app-card
-        :class="{ shadow : selectedCard == card.id }"
-        @click.native="selectedCard = card.id"
-        v-for="(card, index) in cards"
-        :key="index"
-        :card="card"
-      ></app-card>
+      <transition-group name="rotate-all" appear class="card-container">
+        <app-card
+          :class="{ shadow: selectedCard == card.id }"
+          @click.native="selectedCard = card.id"
+          v-for="card in cards"
+          :key="card.id"
+          :card="card"
+        />
+      </transition-group>
     </div>
 
     <div class="container">
-      <app-default-card></app-default-card>
+      <transition name="rotate" mode="out-in">
+        <component
+          :is="activeCard"
+          @click.native="showCard(answer)"
+          :card="answer"
+        />
+      </transition>
     </div>
   </div>
 </template>
@@ -36,34 +44,47 @@ export default {
   data() {
     return {
       selectedCard: null,
+      activeCard: "app-default-card",
+      answer: {},
       cards: [
         {
           id: 1,
-          component: "app-cards",
+          component: "app-card",
           image: require("../assets/card-1.jpg"),
         },
         {
           id: 2,
-          component: "app-cards",
+          component: "app-card",
           image: require("../assets/card-2.jpg"),
         },
         {
           id: 3,
-          component: "app-cards",
+          component: "app-card",
           image: require("../assets/card-3.jpg"),
         },
         {
           id: 4,
-          component: "app-cards",
+          component: "app-card",
           image: require("../assets/card-4.jpg"),
         },
         {
           id: 5,
-          component: "app-cards",
+          component: "app-card",
           image: require("../assets/card-5.jpg"),
         },
       ],
     };
+  },
+  created() {
+    let answer = Math.ceil(Math.random() * this.cards.length);
+
+    this.answer = this.cards[answer - 1];
+  },
+
+  methods: {
+    showCard(answer) {
+      this.activeCard = answer.component;
+    },
   },
 };
 </script>
@@ -73,29 +94,64 @@ export default {
   text-align: center;
   color: rosybrown;
 }
-
 .title span {
   color: mediumpurple;
 }
-
 .title strong {
   color: darkred;
 }
-
 .description {
   color: grey;
   text-align: center;
 }
-
-.container {
+.container,
+.card-container {
   margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .shadow {
   box-shadow: 0px 5px 48px #30969f !important;
   transition: box-shadow 0.5s;
+}
+
+/* Animation Classes */
+
+.rotate-all-enter-active {
+  animation: rotate-all ease-in 2s forwards;
+}
+
+@keyframes rotate-all {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(720deg);
+  }
+}
+
+.rotate-enter-active {
+  animation: rotate-in 1s ease-in-out forwards;
+}
+.rotate-leave-active {
+   animation: rotate-out 1s ease-in-out forwards;
+}
+
+@keyframes rotate-in {
+  from {
+    transform: rotateY(90deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
+@keyframes rotate-out {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(90deg);
+  }
 }
 </style>
