@@ -11,16 +11,20 @@
       <app-card v-for="(card, index) in 5" :key="index"></app-card>
     </div>
 
-    <div class="container"></div>
+    <div class="container">
+      <app-default-card></app-default-card>
+    </div>
   </div>
 </template>
 
 <script>
 import Card from "./Card";
+import DefaultCard from "./DefaultCard";
 
 export default {
   components: {
     appCard: Card,
+    appDefaultCard: DefaultCard,
   },
 };
 </script>
