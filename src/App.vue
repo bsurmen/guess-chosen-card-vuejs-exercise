@@ -1,5 +1,8 @@
 <template>
-  <component :is="activeComponent"></component>
+  <component
+    :is="activeComponent"
+    @isCorrectEvent="activeComponent = $event"
+  ></component>
 </template>
 
 <script>

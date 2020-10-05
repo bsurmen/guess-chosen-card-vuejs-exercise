@@ -83,7 +83,18 @@ export default {
 
   methods: {
     showCard(answer) {
-      this.activeCard = answer.component;
+      if (this.selectedCard == null) {
+        alert("Choose a card!");
+      } else {
+        this.activeCard = answer.component;
+        setTimeout(() => {
+          if (answer.id == this.selectedCard) {
+            this.$emit("isCorrectEvent", "app-celebrate");
+          } else {
+            this.$emit("isCorrectEvent", "app-failure");
+          }
+        }, 1000);
+      }
     },
   },
 };
@@ -135,7 +146,7 @@ export default {
   animation: rotate-in 1s ease-in-out forwards;
 }
 .rotate-leave-active {
-   animation: rotate-out 1s ease-in-out forwards;
+  animation: rotate-out 1s ease-in-out forwards;
 }
 
 @keyframes rotate-in {
