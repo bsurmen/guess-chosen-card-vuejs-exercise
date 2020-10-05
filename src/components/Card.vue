@@ -1,10 +1,14 @@
 <template>
   <div class="card">
-    <img src="../assets/card-1.jpg" />
+    <img :src="card.image" />
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  props: ["card"],
+};
+</script>
 <style scoped>
 .card {
   width: 200px;
