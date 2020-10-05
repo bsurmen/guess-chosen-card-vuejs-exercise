@@ -1,4 +1,4 @@
-# find-chosen-card-vuejs-exercise
+# guess-chosen-card-vuejs-exercise
 
 ## Project setup
 ```
