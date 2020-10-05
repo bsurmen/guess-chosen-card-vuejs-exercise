@@ -1,28 +1,28 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <component :is="activeComponent"></component>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Failure from "./components/Failure";
+import GameCards from "./components/GameCards";
+import Celebrate from "./components/Celebrate";
 
 export default {
-  name: 'App',
+  data() {
+    return {
+      activeComponent: "app-game-cards",
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    appGameCards: GameCards,
+    appCelebrate: Celebrate,
+    appFailure: Failure,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  font-family: sans-serif;
 }
 </style>
