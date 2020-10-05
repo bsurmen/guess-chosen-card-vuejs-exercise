@@ -1,8 +1,10 @@
 <template>
-  <component
-    :is="activeComponent"
-    @isCorrectEvent="activeComponent = $event"
-  ></component>
+  <transition name="slideContainer" mode="out-in">
+    <component
+      :is="activeComponent"
+      @activeComponentEvent="activeComponent = $event"
+    ></component>
+  </transition>
 </template>
 
 <script>
@@ -27,5 +29,34 @@ export default {
 <style>
 body {
   font-family: sans-serif;
+}
+
+.slideContainer-enter-active {
+  animation: slide-in 0.3s ease-in-out forwards;
+}
+.slideContainer-leave-active {
+  animation: slide-out 0.3s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-1000px);
+
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@keyframes slide-out {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
 }
 </style>

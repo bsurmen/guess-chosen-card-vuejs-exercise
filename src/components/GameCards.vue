@@ -89,11 +89,11 @@ export default {
         this.activeCard = answer.component;
         setTimeout(() => {
           if (answer.id == this.selectedCard) {
-            this.$emit("isCorrectEvent", "app-celebrate");
+            this.$emit("activeComponentEvent", "app-celebrate");
           } else {
-            this.$emit("isCorrectEvent", "app-failure");
+            this.$emit("activeComponentEvent", "app-failure");
           }
-        }, 1000);
+        }, 2000);
       }
     },
   },
@@ -138,15 +138,15 @@ export default {
     transform: rotateY(0);
   }
   to {
-    transform: rotateY(720deg);
+    transform: rotateY(1440deg);
   }
 }
 
 .rotate-enter-active {
-  animation: rotate-in 1s ease-in-out forwards;
+  animation: rotate-in .1s ease-in-out forwards;
 }
 .rotate-leave-active {
-  animation: rotate-out 1s ease-in-out forwards;
+  animation: rotate-out .1s ease-in-out forwards;
 }
 
 @keyframes rotate-in {
